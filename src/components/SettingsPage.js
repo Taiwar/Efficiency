@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Menu } from 'semantic-ui-react'
+import { Container, Header, Menu, Grid, Divider } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 export default class SettingsPage extends Component {
@@ -14,9 +14,12 @@ export default class SettingsPage extends Component {
                         <h4>Settings</h4>
                     </Menu.Item>
                 </Menu>
-                <Container>
-                    <Header>Settings</Header>
-                </Container>
+                <Divider hidden/>
+                <Grid.Row>
+                    <Container>
+                        <Header>Settings</Header>
+                    </Container>
+                </Grid.Row>
             </div>
         );
     }
