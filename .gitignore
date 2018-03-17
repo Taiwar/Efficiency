@@ -58,8 +58,9 @@ fabric.properties
 # Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
 
 *.iml
-modules.xml
 *.ipr
 
 
 # End of https://www.gitignore.io/api/webstorm+iml
+
+/src/config/FirebaseConfig.js
