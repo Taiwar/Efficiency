@@ -14,7 +14,7 @@ export default function reducer (state={
                 ...state,
                 todos: state.todos.map(todo =>
                     (todo.id === action.payload)
-                        ? {...todo, isChecked: !todo.isChecked}
+                        ? {...todo, isDone: !todo.isDone}
                         : todo
                 )
             }

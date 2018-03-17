@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Menu, Input, Icon } from 'semantic-ui-react'
-import { connect } from 'react-redux';
-import { addTodo } from '../actions/todosActions';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 class HeaderBar extends Component {
     handleKeyDown(e) {
         if (e.key === "Enter") {
-            this.props.onAddClick(e.target.value);
+            this.props.handleSubmit(e.target.value);
         }
     }
 
@@ -32,17 +31,10 @@ class HeaderBar extends Component {
     }
 }
 
-export default connect(
-    (store) => {
-        return {
-            inputValue: store.todos.inputValue,
-            outputDir: store.settings.outputDir
-        };
-    },
-    (dispatch) => {
-        return {
-            onAddClick: (title) => {
-                dispatch(addTodo(title, "", ""));
-            },
-        }
-    })(HeaderBar)
+HeaderBar.propTypes = {
+    handleSubmit: PropTypes.func,
+    disabled: PropTypes.bool,
+    submitting: PropTypes.bool
+};
+
+export default HeaderBar;

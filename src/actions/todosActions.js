@@ -1,5 +1,5 @@
 const todoTemplate = {
-    isChecked: false
+    isDone: false
 };
 
 const generateKey = (pre) => {
@@ -12,6 +12,15 @@ function isValidProjectName(input) {
 
 function isValidPriority(input) {
     return !!input;
+}
+
+export function formulateTodo(title, project, priority) {
+    return {
+        ...todoTemplate,
+        title: title,
+        project: isValidProjectName(project) ? project : "Inbox",
+        priority: isValidPriority(priority) ? priority : 4
+    }
 }
 
 export function addTodo(title, project, priority) {

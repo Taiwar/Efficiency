@@ -1,51 +1,29 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { removeTodo, toggleTodo } from '../actions/todosActions';
 import { Container, List, Segment } from 'semantic-ui-react';
+import { compose } from 'redux';
+import { withHandlers } from 'recompose';
+import PropTypes from 'prop-types'
+import Reactotron from 'reactotron-react-js'
+import { isLoaded, withFirebase } from 'react-redux-firebase';
+import { map } from 'lodash';
+import TodoItem from '../components/TodoItem';
 
 class TodosList extends Component {
     render() {
-        const { todos, onRemoveClick, onCheckClick } = this.props;
+        const { todos, toggleDone, deleteTodo } = this.props;
 
-        const correctIcon = (todo) => {
-            if (!todo.isChecked) {
-                return (
-                    <List.Icon
-                        name='circle outline'
-                        onClick={() => onCheckClick(todo.id)}
-                        link={true}
+        const todoElements = !isLoaded()
+            ? 'Loading'
+            : () => {
+                return  map(todos, (todo, id) => (
+                    <TodoItem
+                        key={id}
+                        id={id}
+                        todo={todo}
+                        onCompleteClick={toggleDone}
+                        onDeleteClick={deleteTodo}
                     />
-                )
-            } else {
-                return (
-                    <List.Icon
-                        name='check circle outline'
-                        onClick={() => onCheckClick(todo.id)}
-                        link={true}
-                    />
-                )
-            }
-
-        };
-
-        const todoElements = () => {
-            return todos.map((todo) => {
-                return (
-                    <List.Item key={todo.id}>
-                        <List.Content floated='right'>
-                            <List.Icon
-                                name='close'
-                                onClick={() => onRemoveClick(todo.id)}
-                                link={true}
-                            />
-                        </List.Content>
-                        {correctIcon(todo)}
-                        <List.Content>
-                            <List.Header>{todo.title}</List.Header>
-                        </List.Content>
-                    </List.Item>
-                );
-            });
+                ));
         };
 
         return (
@@ -60,19 +38,33 @@ class TodosList extends Component {
     }
 }
 
-export default connect(
-    (store) => {
-        return {
-            todos: store.todos.todos,
-        };
-    },
-    (dispatch) => {
-        return {
-            onRemoveClick: (id) => {
-                dispatch(removeTodo(id));
-            },
-            onCheckClick: (id) => {
-                dispatch(toggleTodo(id));
-            }
+TodosList.propTypes = {
+    todos: PropTypes.object,
+    toggleDone: PropTypes.func,
+    deleteTodo: PropTypes.func,
+    firebase: PropTypes.object
+};
+
+export default compose(
+    withFirebase,
+    withHandlers({
+        toggleDone: props => (todo, id) => {
+            const { firebase, auth } = props;
+            /*if (!auth || !auth.uid) {
+                return Reactotron.log('You must be Logged in to toggleDone')
+            }*/
+            return firebase.set(`todos/${id}/isDone`, !todo.isDone)
+        },
+        deleteTodo: props => (todo, id) =>  {
+            const { todos, auth, firebase } = props;
+            /* if (!auth || !auth.uid || todos[id].owner !== auth.uid) {
+                return Reactotron.log('You must own todo to edit')
+            }*/
+            return firebase.remove(`todos/${id}`).catch(err => {
+                // TODO: Have error caught by epic
+                Reactotron.error('Error removing todo: ', err);
+                return Promise.reject(err)
+            })
         }
-    })(TodosList)
+    })
+)(TodosList)
