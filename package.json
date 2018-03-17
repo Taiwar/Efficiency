@@ -10,13 +10,14 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
+    "react-redux-firebase": "^2.0.5",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
     "redux-persist": "^5.9.1",
+    "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.3.0",
     "semantic-ui-react": "^0.78.3"
@@ -26,5 +27,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "reactotron-react-js": "^1.13.0",
+    "reactotron-redux": "^1.13.0",
+    "reactotron-redux-saga": "^1.13.0"
   }
 }
