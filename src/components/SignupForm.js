@@ -30,9 +30,9 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-    pristine: PropTypes.bool.isRequired, // added by redux-form
-    submitting: PropTypes.bool.isRequired, // added by redux-form
-    handleSubmit: PropTypes.func.isRequired // added by redux-form
+    pristine: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired
 };
 
 export default reduxForm({

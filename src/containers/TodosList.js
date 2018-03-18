@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Container, List, Segment } from 'semantic-ui-react';
 import { compose } from 'redux';
 import { withHandlers } from 'recompose';
-import PropTypes from 'prop-types'
 import Reactotron from 'reactotron-react-js'
 import { isLoaded, withFirebase } from 'react-redux-firebase';
 import { map } from 'lodash';
@@ -41,8 +41,7 @@ class TodosList extends Component {
 TodosList.propTypes = {
     todos: PropTypes.object,
     toggleDone: PropTypes.func,
-    deleteTodo: PropTypes.func,
-    firebase: PropTypes.object
+    deleteTodo: PropTypes.func
 };
 
 export default compose(

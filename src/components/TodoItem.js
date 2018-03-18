@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { List } from 'semantic-ui-react';
 
 const TodoItem = ({ todo, id, onCompleteClick, onDeleteClick }) => (
@@ -28,5 +29,12 @@ const TodoItem = ({ todo, id, onCompleteClick, onDeleteClick }) => (
         </List.Content>
     </List.Item>
 );
+
+TodoItem.propTypes = {
+    todo: PropTypes.object,
+    id: PropTypes.string,
+    onCompleteClick: PropTypes.func,
+    onDeleteClick: PropTypes.func
+};
 
 export default TodoItem;

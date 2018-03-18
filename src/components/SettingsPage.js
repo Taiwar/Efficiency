@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Menu, Grid, Divider } from 'semantic-ui-react'
+import { Container, Header, Menu, Grid, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 export default class SettingsPage extends Component {

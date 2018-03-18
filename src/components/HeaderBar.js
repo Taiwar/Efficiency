@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Menu, Input, Icon } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
+import { Menu, Input, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import { ROOT_PATH, SETTINGS_PATH } from '../constants';
 
 class HeaderBar extends Component {
@@ -33,9 +33,7 @@ class HeaderBar extends Component {
 }
 
 HeaderBar.propTypes = {
-    handleSubmit: PropTypes.func,
-    disabled: PropTypes.bool,
-    submitting: PropTypes.bool
+    handleSubmit: PropTypes.func
 };
 
 export default HeaderBar;

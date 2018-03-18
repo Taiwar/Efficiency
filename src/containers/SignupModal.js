@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Modal } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Modal } from 'semantic-ui-react';
 import { compose } from 'redux';
 import { withHandlers } from 'recompose';
 import { withFirebase } from 'react-redux-firebase';
-import SignupForm from '../components/SignupForm';
 import { isEmpty, isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import SignupForm from '../components/SignupForm';
 
 class SignupModal extends Component {
 
@@ -24,6 +24,7 @@ class SignupModal extends Component {
 }
 
 SignupModal.propTypes = {
+    auth: PropTypes.object,
     isAuthed: PropTypes.bool,
     emailSignup: PropTypes.func,
     onSubmitFail: PropTypes.func,

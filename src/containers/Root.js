@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { connect, Provider } from 'react-redux';
-import Routes from '../routes';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 import { PURGE } from 'redux-persist';
+import Routes from '../routes';
 import SignupModal from './SignupModal';
 
 class Root extends Component {
@@ -31,6 +32,10 @@ function purgeStore(dispatch) {
     });
 }
 
-export default connect(({ firebase, firebase: { auth } }) => ({
-    auth: auth,
-}))(Root)
+Root.propTypes = {
+    history: PropTypes.object.isRequired,
+    persistor: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired
+};
+
+export default Root;

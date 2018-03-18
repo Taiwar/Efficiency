@@ -1,11 +1,10 @@
 import React from 'react';
-import Reactotron from 'reactotron-react-js'
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import PropTypes from 'prop-types'
 import { firebaseConnect, populate } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { withHandlers } from 'recompose';
-import { Divider, Grid } from 'semantic-ui-react'
+import { Divider, Grid } from 'semantic-ui-react';
 import HeaderBar from '../components/HeaderBar';
 import TodosList from './TodosList';
 import { formulateTodo } from '../actions/todosActions';
@@ -22,12 +21,11 @@ const HomePage = ({ todos, auth, addNew }) => (
 
 HomePage.propTypes = {
     todos: PropTypes.oneOfType([
-        PropTypes.object, // object if using firebase.data
-        PropTypes.array // array if using firebase.ordered
+        PropTypes.object,
+        PropTypes.array
     ]),
     addNew: PropTypes.func.isRequired,
-    uid: PropTypes.string,
-    username: PropTypes.string
+    auth: PropTypes.object,
 };
 
 export default compose(
