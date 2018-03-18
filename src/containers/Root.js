@@ -4,18 +4,21 @@ import Routes from '../routes';
 import { ConnectedRouter } from 'react-router-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { PURGE } from 'redux-persist';
+import SignupModal from './SignupModal';
 
 class Root extends Component {
-
     render() {
         return (
-            <Provider store={this.props.store}>
-                <PersistGate loading={null} persistor={this.props.persistor}>
-                    <ConnectedRouter history={this.props.history}>
-                        <Routes />
-                    </ConnectedRouter>
-                </PersistGate>
-            </Provider>
+            <div>
+                <Provider store={this.props.store}>
+                    <PersistGate loading={null} persistor={this.props.persistor}>
+                        <ConnectedRouter history={this.props.history}>
+                            <Routes />
+                        </ConnectedRouter>
+                        <SignupModal/>
+                    </PersistGate>
+                </Provider>
+            </div>
         );
     }
 }
@@ -28,16 +31,6 @@ function purgeStore(dispatch) {
     });
 }
 
-export default connect(
-    (store) => {
-        return {
-
-        };
-    },
-    (dispatch) => {
-        // purgeStore(dispatch);
-        return {
-
-        };
-    }
-)(Root)
+export default connect(({ firebase, firebase: { auth } }) => ({
+    auth: auth,
+}))(Root)

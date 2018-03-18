@@ -6,16 +6,16 @@ import { firebaseConnect, populate } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { withHandlers } from 'recompose';
 import { Divider, Grid } from 'semantic-ui-react'
-import HeaderBar from './HeaderBar';
+import HeaderBar from '../components/HeaderBar';
 import TodosList from './TodosList';
 import { formulateTodo } from '../actions/todosActions';
 
-const HomePage = ({ todos, uid, addNew }) => (
+const HomePage = ({ todos, auth, addNew }) => (
     <div>
         <HeaderBar handleSubmit={addNew} />
         <Divider hidden/>
         <Grid.Row>
-            <TodosList todos={todos} uid={uid} />
+            <TodosList todos={todos} uid={auth.uid} />
         </Grid.Row>
     </div>
 );
@@ -38,14 +38,14 @@ export default compose(
         }
     ]),
     connect(({ firebase, firebase: { auth } }) => ({
-        uid: auth.uid,
+        auth: auth,
         todos: populate(firebase, 'todos', {})
     })),
     withHandlers({
         addNew: props => newTodo => {
             props.firebase.push('todos', {
                 ...formulateTodo(newTodo),
-                owner: props.uid || 'Anonymous'
+                owner: props.auth.uid || 'Anonymous'
             })
         }
     })
