@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Input, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
+import { ROOT_PATH, SETTINGS_PATH } from '../constants';
 
 class HeaderBar extends Component {
     handleKeyDown(e) {
@@ -13,7 +14,7 @@ class HeaderBar extends Component {
     render() {
         return (
             <Menu attached='top' inverted>
-                <Menu.Item header as={Link} to="">
+                <Menu.Item header as={Link} to={ROOT_PATH}>
                     <h3>Efficiency</h3>
                 </Menu.Item>
                 <Menu.Item>
@@ -23,7 +24,7 @@ class HeaderBar extends Component {
                         onKeyPress={(e) => this.handleKeyDown(e)}
                     />
                 </Menu.Item>
-                <Menu.Item position='right' as={Link} to='settings'>
+                <Menu.Item position='right' as={Link} to={SETTINGS_PATH}>
                     <Icon name='settings'/>
                 </Menu.Item>
             </Menu>
