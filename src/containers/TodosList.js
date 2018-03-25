@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 class TodosList extends Component {
     render() {
-        const { list, toggleDone, deleteTodo } = this.props;
+        const { list, toggleDone, deleteTodo, editTodo } = this.props;
 
         const todoElements = !isLoaded()
             ? 'Loading'
@@ -23,6 +23,7 @@ class TodosList extends Component {
                         todo={todo}
                         onCompleteClick={toggleDone}
                         onDeleteClick={deleteTodo}
+                        onEditTodo={editTodo}
                     />
                 ));
         };
@@ -42,7 +43,8 @@ class TodosList extends Component {
 TodosList.propTypes = {
     todos: PropTypes.object,
     toggleDone: PropTypes.func,
-    deleteTodo: PropTypes.func
+    deleteTodo: PropTypes.func,
+    editTodo: PropTypes.func
 };
 
 export default compose(
@@ -53,9 +55,6 @@ export default compose(
     withHandlers({
         toggleDone: props => (todo, id) => {
             const { firebase, auth } = props;
-            /*if (!auth || !auth.uid) {
-                return Reactotron.log('You must be Logged in to toggleDone')
-            }*/
             return firebase.set(`/lists/${auth.uid}/${id}/isDone`, !todo.isDone)
         },
         deleteTodo: props => (todo, id) =>  {
@@ -64,6 +63,10 @@ export default compose(
                 Reactotron.error('Error removing todo: ', err);
                 return Promise.reject(err)
             })
-        }
+        },
+        editTodo: props => (todo, id, title) => {
+            const { firebase, auth } = props;
+            return firebase.set(`/lists/${auth.uid}/${id}/title`, title)
+        },
     })
 )(TodosList)
