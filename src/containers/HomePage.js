@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { firebaseConnect, populate } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import { firebaseConnect, populate } from 'react-redux-firebase';
 import { withHandlers } from 'recompose';
 import { Divider, Grid } from 'semantic-ui-react';
 import HeaderBar from '../components/HeaderBar';

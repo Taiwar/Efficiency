@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, List, Segment } from 'semantic-ui-react';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Container, List, Segment } from 'semantic-ui-react';
 import { withHandlers } from 'recompose';
 import Reactotron from 'reactotron-react-js'
 import { isLoaded, withFirebase } from 'react-redux-firebase';
 import { map } from 'lodash';
 import TodoItem from '../components/TodoItem';
-import { connect } from 'react-redux';
 
 class TodosList extends Component {
     render() {

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal } from 'semantic-ui-react';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Button, Modal } from 'semantic-ui-react';
 import { withHandlers } from 'recompose';
 import { withFirebase } from 'react-redux-firebase';
 import { isEmpty, isLoaded } from 'react-redux-firebase';
-import { connect } from 'react-redux';
 import SignupForm from '../components/SignupForm';
 import SigninForm from '../components/SigninForm';
 

@@ -51,6 +51,7 @@ class TodoItem extends Component {
     }
 
     render() {
+        const colors = {1: 'red', 2: 'orange', 3: 'yellow', 4: 'grey'};
         const { todo, id, onCompleteClick, onDeleteClick } = this.props;
         return (
             <List.Item className={todo.isDone ? 'greyedOut' : ''}>
@@ -70,6 +71,7 @@ class TodoItem extends Component {
                         />
                         : <List.Icon
                             name='circle outline'
+                            color={colors[todo.priority]}
                             onClick={() => onCompleteClick(todo, id)}
                             link={true}
                         />
