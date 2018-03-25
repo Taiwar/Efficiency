@@ -8,14 +8,16 @@ import { Divider, Grid } from 'semantic-ui-react';
 import HeaderBar from '../components/HeaderBar';
 import TodosList from './TodosList';
 import { formulateTodo } from '../actions/todosActions';
+import SignupModal from './AuthModal';
 
-const HomePage = ({ todos, auth, addNew }) => (
+const HomePage = ({ list, auth, addNew }) => (
     <div>
         <HeaderBar handleSubmit={addNew} />
         <Divider hidden/>
         <Grid.Row>
-            <TodosList todos={todos} uid={auth.uid} />
+            <TodosList list={list} uid={auth.uid} />
         </Grid.Row>
+        <SignupModal/>
     </div>
 );
 
@@ -29,21 +31,23 @@ HomePage.propTypes = {
 };
 
 export default compose(
-    firebaseConnect([
-        {
-            path: 'todos',
-            queryParams: ['orderByKey']
-        }
-    ]),
     connect(({ firebase, firebase: { auth } }) => ({
         auth: auth,
-        todos: populate(firebase, 'todos', {})
+    })),
+    firebaseConnect((props) => ([
+        {
+            path: `/lists/${props.auth.uid}`,
+            queryParams: ['orderByKey']
+        }
+    ])),
+    connect(({ firebase, firebase: { auth } }) => ({
+        list: populate(firebase, `/lists/${auth.uid}`, {})
     })),
     withHandlers({
         addNew: props => newTodo => {
-            props.firebase.push('todos', {
+            props.firebase.push(`/lists/${props.auth.uid}`, {
                 ...formulateTodo(newTodo),
-                owner: props.auth.uid || 'Anonymous'
+                owner: props.auth.uid
             })
         }
     })

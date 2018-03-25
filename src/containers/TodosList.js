@@ -7,15 +7,16 @@ import Reactotron from 'reactotron-react-js'
 import { isLoaded, withFirebase } from 'react-redux-firebase';
 import { map } from 'lodash';
 import TodoItem from '../components/TodoItem';
+import { connect } from 'react-redux';
 
 class TodosList extends Component {
     render() {
-        const { todos, toggleDone, deleteTodo } = this.props;
+        const { list, toggleDone, deleteTodo } = this.props;
 
         const todoElements = !isLoaded()
             ? 'Loading'
             : () => {
-                return  map(todos, (todo, id) => (
+                return  map(list, (todo, id) => (
                     <TodoItem
                         key={id}
                         id={id}
@@ -46,21 +47,20 @@ TodosList.propTypes = {
 
 export default compose(
     withFirebase,
+    connect(({ firebase, firebase: { auth } }) => ({
+        auth: auth,
+    })),
     withHandlers({
         toggleDone: props => (todo, id) => {
             const { firebase, auth } = props;
             /*if (!auth || !auth.uid) {
                 return Reactotron.log('You must be Logged in to toggleDone')
             }*/
-            return firebase.set(`todos/${id}/isDone`, !todo.isDone)
+            return firebase.set(`/lists/${auth.uid}/${id}/isDone`, !todo.isDone)
         },
         deleteTodo: props => (todo, id) =>  {
-            const { todos, auth, firebase } = props;
-            /* if (!auth || !auth.uid || todos[id].owner !== auth.uid) {
-                return Reactotron.log('You must own todo to edit')
-            }*/
-            return firebase.remove(`todos/${id}`).catch(err => {
-                // TODO: Have error caught by epic
+            const { auth, firebase } = props;
+            return firebase.remove(`/lists/${auth.uid}/${id}`).catch(err => {
                 Reactotron.error('Error removing todo: ', err);
                 return Promise.reject(err)
             })

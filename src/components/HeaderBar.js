@@ -8,6 +8,7 @@ class HeaderBar extends Component {
     handleKeyDown(e) {
         if (e.key === "Enter") {
             this.props.handleSubmit(e.target.value);
+            e.target.value = "";
         }
     }
 

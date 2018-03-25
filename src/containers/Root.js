@@ -5,7 +5,6 @@ import { ConnectedRouter } from 'react-router-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { PURGE } from 'redux-persist';
 import Routes from '../routes';
-import SignupModal from './SignupModal';
 
 class Root extends Component {
     render() {
@@ -16,7 +15,6 @@ class Root extends Component {
                         <ConnectedRouter history={this.props.history}>
                             <Routes />
                         </ConnectedRouter>
-                        <SignupModal/>
                     </PersistGate>
                 </Provider>
             </div>
