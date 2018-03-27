@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { isLoaded } from 'react-redux-firebase';
 import { Container, Divider, Header } from 'semantic-ui-react';
-import { filter, map, values } from 'lodash';
+import { filter, map, values, isEmpty } from 'lodash';
 import TodosList from '../containers/TodosList';
 
 class TodosView extends Component {
@@ -22,12 +22,15 @@ class TodosView extends Component {
                         if (!todos.hasOwnProperty(todoId) || todos[todoId].project !== key) continue;
                         projectTodos[todoId] = todos[todoId];
                     }
+                    if (isEmpty(projectTodos)) {
+                        return ""
+                    }
                     const block = (
-                        <div key={key}>
-                            {firstList ? "" : <Divider/>}
-                            <Header as='h2'>{key}</Header>
-                            <TodosList todos={projectTodos}/>
-                        </div>
+                            <div key={key}>
+                                {firstList ? "" : <Divider/>}
+                                <Header as='h2'>{key}</Header>
+                                <TodosList todos={projectTodos}/>
+                            </div>
                     );
                     firstList = false;
                     return block
