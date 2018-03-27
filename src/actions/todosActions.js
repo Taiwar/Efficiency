@@ -14,12 +14,12 @@ function isValidPriority(input) {
     return !!input;
 }
 
-export function formulateTodo(title, project, priority) {
+export function formulateTodo(todo) {
     return {
         ...todoTemplate,
-        title: title,
-        project: isValidProjectName(project) ? project : "Inbox",
-        priority: isValidPriority(priority) ? priority : 4
+        title: todo.title,
+        project: isValidProjectName(todo.project) ? todo.project : "Inbox",
+        priority: isValidPriority(todo.priority) ? todo.priority : 4
     }
 }
 

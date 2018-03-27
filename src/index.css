@@ -9,6 +9,10 @@ body {
     opacity: 0.4;
 }
 
+.ui.inverted.menu .item:before {
+    background: inherit;
+}
+
 .modal {
     margin-top: 0 !important;
     margin-left: auto !important;
