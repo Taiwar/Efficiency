@@ -54,9 +54,7 @@ class HeaderBar extends Component {
 
     handlePropDelete(key) {
         const todo = this.state.todo;
-        console.log("handling prop:", key);
         delete todo[key];
-        console.log("todo:", todo);
         this.setState({
             todo: todo
         })

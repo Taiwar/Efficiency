@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Input, List } from 'semantic-ui-react';
+import { Input, Label, List, Icon } from 'semantic-ui-react';
 
 class TodoItem extends Component {
     constructor() {
@@ -56,6 +56,10 @@ class TodoItem extends Component {
         return (
             <List.Item className={todo.isDone ? 'greyedOut' : ''}>
                 <List.Content floated='right'>
+                    <Label>
+                        <Icon name='inbox' />
+                        {todo.project}
+                    </Label>
                     <List.Icon
                         name='close'
                         onClick={() => onDeleteClick(todo, id)}
