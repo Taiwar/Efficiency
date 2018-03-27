@@ -13,6 +13,28 @@ export const reduxFirebase = {
 };
 ```
 
+### Firebase Database Rules
+```json
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".write": "$uid === auth.uid",
+        ".read": "$uid === auth.uid"
+      }
+    },
+    "lists": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
+    }
+  }
+}
+```
+
+### Running Efficiency
+
 Use `yarn start` to launch a dev version.
 
 Use `yarn build` to build a distributable version.
