@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { Menu, Input, Icon, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { ROOT_PATH, SETTINGS_PATH } from '../constants';
 import { map } from 'lodash';
+import { ROOT_PATH, SETTINGS_PATH } from '../constants';
 
 class HeaderBar extends Component {
     constructor() {

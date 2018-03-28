@@ -22,11 +22,8 @@ const HomePage = ({ list, auth, addNew }) => (
 );
 
 HomePage.propTypes = {
-    todos: PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.array
-    ]),
-    addNew: PropTypes.func.isRequired,
+    list: PropTypes.object,
+    addNew: PropTypes.func,
     auth: PropTypes.object,
 };
 

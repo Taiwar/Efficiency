@@ -46,10 +46,7 @@ class TodosView extends Component {
 }
 
 TodosView.propTypes = {
-    todos: PropTypes.object,
-    toggleDone: PropTypes.func,
-    deleteTodo: PropTypes.func,
-    editTodo: PropTypes.func
+    list: PropTypes.object,
 };
 
 export default compose()(TodosView)
