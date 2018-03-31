@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { isLoaded } from 'react-redux-firebase';
 import { Container, Divider, Header } from 'semantic-ui-react';
-import { filter, map, values, isEmpty } from 'lodash';
+import { map, isEmpty } from 'lodash';
 import TodosList from '../containers/TodosList';
 
 class TodosView extends Component {
