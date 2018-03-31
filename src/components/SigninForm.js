@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, Icon } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
-import { SIGNIN_FORM_NAME } from '../constants';
+import { SIGNIN_FORM_NAME } from '../util/constants';
 
 class SigninForm extends Component {
     render() {
@@ -11,7 +11,7 @@ class SigninForm extends Component {
             <Form onSubmit={handleSubmit}>
                 <Form.Field required>
                     <label>Email</label>
-                    <Field name='email' component='input' placeholder='Email' type='text'/>
+                    <Field name='email' component='input' placeholder='Email' type='email'/>
                 </Form.Field>
                 <Form.Field required={true}>
                     <label>Password</label>

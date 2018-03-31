@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Modal } from 'semantic-ui-react';
+import { Button, Divider, Modal } from 'semantic-ui-react';
 import { withHandlers } from 'recompose';
 import { withFirebase } from 'react-redux-firebase';
 import { isEmpty, isLoaded } from 'react-redux-firebase';
@@ -27,25 +27,27 @@ class AuthModal extends Component {
             let openModal = isLoaded(this.props.auth) ? isEmpty(this.props.auth) : false;
             return (
                 <div>
-                    <Modal size='large' open={openModal && !this.state.showLogin}>
-                        <Modal.Header>Sign Up</Modal.Header>
-                        <Modal.Content>
-                            <SignupForm onSubmit={this.props.emailSignup} onSubmitFail={this.props.onSubmitFail}/>
-                            <hr/>
-                            <Button onClick={() => this.toggleModal()}>
-                                Already have an account?
-                            </Button>
-                        </Modal.Content>
-                    </Modal>
-                    <Modal size='large' open={this.state.showLogin}>
-                        <Modal.Header>Sign In</Modal.Header>
-                        <Modal.Content>
-                            <SigninForm onSubmit={this.props.emailSignin} onSubmitFail={this.props.onSubmitFail}/>
-                            <hr/>
-                            <Button onClick={() => this.toggleModal()}>
-                                Need an account?
-                            </Button>
-                        </Modal.Content>
+                    <Modal size='large' open={openModal}>
+                        <Modal.Header>{this.state.showLogin ? 'Sign In' : 'Sign Up'}</Modal.Header>
+                        {
+                            this.state.showLogin
+                            ?
+                                <Modal.Content>
+                                    <SigninForm onSubmit={this.props.emailSignin} onSubmitFail={this.props.onSubmitFail}/>
+                                    <Divider/>
+                                    <Button onClick={() => this.toggleModal()}>
+                                        Need an account?
+                                    </Button>
+                                </Modal.Content>
+                            :
+                                <Modal.Content>
+                                    <SignupForm onSubmit={this.props.emailSignup} onSubmitFail={this.props.onSubmitFail}/>
+                                    <hr/>
+                                    <Button onClick={() => this.toggleModal()}>
+                                        Already have an account?
+                                    </Button>
+                                </Modal.Content>
+                        }
                     </Modal>
                 </div>
         );
@@ -56,7 +58,7 @@ AuthModal.propTypes = {
     auth: PropTypes.object,
     emailSignup: PropTypes.func,
     emailSignin: PropTypes.func,
-    onSubmitFail: PropTypes.func,
+    onSubmitFail: PropTypes.func
 };
 
 export default compose(
