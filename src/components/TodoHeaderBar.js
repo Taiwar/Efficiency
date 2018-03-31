@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Menu, Input, Icon, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
-import { ROOT_PATH, SETTINGS_PATH } from '../constants';
+import { ROOT_PATH, SETTINGS_PATH } from '../util/constants';
 
-class HeaderBar extends Component {
+class TodoHeaderBar extends Component {
     constructor() {
         super();
         this.state = {
@@ -116,8 +116,8 @@ class HeaderBar extends Component {
     }
 }
 
-HeaderBar.propTypes = {
+TodoHeaderBar.propTypes = {
     handleSubmit: PropTypes.func
 };
 
-export default HeaderBar;
+export default TodoHeaderBar;

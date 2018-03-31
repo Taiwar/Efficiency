@@ -5,19 +5,19 @@ import { connect } from 'react-redux';
 import { firebaseConnect, populate } from 'react-redux-firebase';
 import { withHandlers } from 'recompose';
 import { Divider, Grid } from 'semantic-ui-react';
-import HeaderBar from '../components/HeaderBar';
+import TodoHeaderBar from '../components/TodoHeaderBar';
 import { formulateTodo } from '../actions/todosActions';
-import SignupModal from './AuthModal';
+import AuthModal from './AuthModal';
 import TodosView from '../components/TodosView';
 
 const HomePage = ({ list, auth, addNew }) => (
     <div>
-        <HeaderBar handleSubmit={addNew} />
+        <TodoHeaderBar handleSubmit={addNew} />
         <Divider hidden/>
         <Grid.Row>
             <TodosView list={list}/>
         </Grid.Row>
-        <SignupModal/>
+        <AuthModal/>
     </div>
 );
 
