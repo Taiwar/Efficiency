@@ -13,7 +13,7 @@ class Root extends Component {
                 <Provider store={this.props.store}>
                     <PersistGate loading={null} persistor={this.props.persistor}>
                         <ConnectedRouter history={this.props.history}>
-                            <Routes />
+                            <Routes/>
                         </ConnectedRouter>
                     </PersistGate>
                 </Provider>

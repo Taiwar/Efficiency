@@ -27,7 +27,7 @@ class TodosView extends Component {
                     }
                     const block = (
                             <div key={key}>
-                                {firstList ? "" : <Divider/>}
+                                {firstList ? "" : <Divider hidden/>}
                                 <Header as='h2'>{key}</Header>
                                 <TodosList todos={projectTodos}/>
                             </div>
