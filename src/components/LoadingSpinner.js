@@ -9,6 +9,6 @@ const LoadingSpinner = () => (
             </Dimmer>
         </Segment>
     </div>
-)
+);
 
 export default LoadingSpinner;

@@ -4,6 +4,7 @@ import { Menu, Input, Icon, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
 import { ROOT_PATH, SETTINGS_PATH } from '../util/constants';
+import { matchDate, matchPriority, matchProject } from '../util/userInput';
 
 class TodoHeaderBar extends Component {
     constructor() {
@@ -14,31 +15,18 @@ class TodoHeaderBar extends Component {
     }
 
     handleChange(e) {
-        const value = e.target.value;
-
-        const projectRegEx = new RegExp('#([^\ ]+)');
-        const projectMatch = projectRegEx.exec(value);
-        if (projectMatch) {
-            if (value.slice(-1) === " ") {
-                const project = projectMatch[1];
-                e.target.value = value.slice(0, -(project.length+2));
-                this.setState({
-                    todo: {...this.state.todo, project: project}
-                })
+        const field = e.target;
+        const value = field.value;
+        const priority = matchPriority(value, field);
+        const project = matchProject(value, field);
+        matchDate(value, field);
+        this.setState({
+            todo: {
+                ...this.state.todo,
+                priority: !priority ? this.state.todo.priority : priority,
+                project: !project ? this.state.todo.project : project
             }
-        }
-
-        const priorityRegEx = new RegExp('!([^\ ]{1})');
-        const priorityMatch = priorityRegEx.exec(value);
-        if (priorityMatch) {
-            if (value.slice(-1) === " " && 0 < parseInt(priorityMatch[1]) < 5) {
-                const priority = parseInt(priorityMatch[1]);
-                e.target.value = value.slice(0, -3);
-                this.setState({
-                    todo: {...this.state.todo, priority: priority}
-                })
-            }
-        }
+        });
     }
 
     handleKeyDown(e) {
@@ -94,6 +82,9 @@ class TodoHeaderBar extends Component {
                         {
                             map(this.state.todo, (value, key) =>
                                 {
+                                    if (!value) {
+                                        return;
+                                    }
                                     return (
                                         <Label key={key} size='large'>
                                             {labelContent(value, key)}

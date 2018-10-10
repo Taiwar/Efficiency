@@ -14,12 +14,18 @@ function isValidPriority(input) {
     return !!input;
 }
 
+function isValidDate(input) {
+    return !!input;
+}
+
+
 export function formulateTodo(todo) {
     return {
         ...todoTemplate,
         title: todo.title,
         project: isValidProjectName(todo.project) ? todo.project : "Inbox",
-        priority: isValidPriority(todo.priority) ? todo.priority : 4
+        priority: isValidPriority(todo.priority) ? todo.priority : 4,
+        date: isValidDate(todo.date) ? todo.date : null
     }
 }
 

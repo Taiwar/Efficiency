@@ -27,8 +27,8 @@ class TodosView extends Component {
                     }
                     const block = (
                             <div key={key}>
-                                {firstList ? "" : <Divider hidden/>}
-                                <Header as='h2'>{key}</Header>
+                                {!firstList && <Divider hidden/>}
+                                <Header inverted as='h2'>{key}</Header>
                                 <TodosList todos={projectTodos}/>
                             </div>
                     );

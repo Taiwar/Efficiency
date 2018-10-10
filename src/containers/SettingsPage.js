@@ -8,7 +8,6 @@ import AuthModal from './AuthModal';
 
 class SettingsPage extends Component {
     handleLogout() {
-        console.log(this.props.auth);
         this.props.firebase.logout();
         this.props.history.push('');
     }
