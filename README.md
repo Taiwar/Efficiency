@@ -39,4 +39,8 @@ Use `yarn start` to launch a dev version.
 
 Use `yarn build` to build a distributable version.
 
-![Alt text](/public/favicon.png?raw=true)
+![Alt text](/public/favicon.png?raw=true)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FTaiwar%2FEfficiency.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FTaiwar%2FEfficiency?ref=badge_shield)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FTaiwar%2FEfficiency.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FTaiwar%2FEfficiency?ref=badge_large)
